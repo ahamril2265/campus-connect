@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../config/db');
+const pool = require('../config/db');
 
 // Add Club (Admin only)
 router.post('/add', (req, res) => {
   const { name, description } = req.body;
   const sql = 'INSERT INTO clubs (name, description) VALUES (?, ?)';
-  db.query(sql, [name, description], (err, result) => {
+  pool.query(sql, [name, description], (err, result) => {
     if (err) return res.status(500).json({ error: err });
     res.status(201).json({ message: 'Club added successfully' });
   });
@@ -14,7 +14,7 @@ router.post('/add', (req, res) => {
 
 // View All Clubs
 router.get('/all', (req, res) => {
-  db.query('SELECT * FROM clubs', (err, results) => {
+  pool.query('SELECT * FROM clubs', (err, results) => {
     if (err) return res.status(500).json({ error: err });
     res.status(200).json(results);
   });
@@ -24,8 +24,8 @@ router.get('/all', (req, res) => {
 router.post('/join', (req, res) => {
   const { user_id, club_id } = req.body;
 
-  const sql = 'INSERT INTO club_members (user_id, club_id) VALUES (?, ?)';
-  db.query(sql, [user_id, club_id], (err, result) => {
+  const sql = 'INSERT INTO club_members (user_id, club_id) VALUES ($1, $2)';
+  pool.query(sql, [user_id, club_id], (err, result) => {
     if (err) {
       if (err.code === 'ER_DUP_ENTRY') {
         return res.status(409).json({ error: 'You have already joined this club!' });
@@ -46,9 +46,9 @@ router.get('/myclubs/:userId', (req, res) => {
     SELECT c.id, c.name, c.description
     FROM clubs c
     JOIN club_members m ON c.id = m.club_id
-    WHERE m.user_id = ?
+    WHERE m.user_id = $1
   `;
-  db.query(sql, [userId], (err, results) => {
+  pool.query(sql, [userId], (err, results) => {
     if (err) return res.status(500).json({ error: err });
     res.status(200).json(results);
   });
