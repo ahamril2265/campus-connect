@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 // Update Password (Authenticated)
 router.post('/update-password', (req, res) => {
