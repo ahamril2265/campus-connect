@@ -6,7 +6,7 @@ function Clubs() {
   const user = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_BASE}/clubs/all`);
+    axios.get(`${process.env.REACT_APP_API_BASE}/clubs/all`)
     .then(res => setClubs(res.data))
       .catch(err => console.error('Error fetching clubs:', err));
   }, []);

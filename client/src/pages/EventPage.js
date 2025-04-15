@@ -6,18 +6,18 @@ function EventPage() {
   const user = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_BASE}/events/all`);
-    .then(res => setEvents(res.data))
+    axios.get(`${process.env.REACT_APP_API_BASE}/events/all`)
+      .then(res => setEvents(res.data))
       .catch(err => console.error(err));
   }, []);
 
   const registerEvent = async (eventId) => {
     try {
       await axios.post(`${process.env.REACT_APP_API_BASE}/events/register`, {
-        user_id,
-        event_id
+        user_id: user.id,         // ✅ Corrected: use user.id
+        event_id: eventId         // ✅ Corrected: use eventId from parameter
       });
-            alert('Registered for event!');
+      alert('Registered for event!');
     } catch (err) {
       alert('Already registered or error!');
     }

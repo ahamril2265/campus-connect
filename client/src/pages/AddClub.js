@@ -13,7 +13,7 @@ function AddClub() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${process.env.REACT_APP_API_BASE}/clubs/add`, club);
+      await axios.post(`${process.env.REACT_APP_API_BASE}/clubs/add`, club)
       alert('Club added successfully!');
       navigate('/dashboard');
     } catch (err) {

@@ -13,7 +13,7 @@ function AddAnnouncement() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${process.env.REACT_APP_API_BASE}/announcements/add`, form);
+      await axios.post(`${process.env.REACT_APP_API_BASE}/announcements/add`, form)
       alert('Announcement posted!');
       navigate('/dashboard');
     } catch (err) {

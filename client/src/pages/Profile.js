@@ -9,11 +9,11 @@ function Profile() {
   useEffect(() => {
     if (!user?.id) return;
 
-    axios.get(`${process.env.REACT_APP_API_BASE}/events/registered/${user.id}`);
+    axios.get(`${process.env.REACT_APP_API_BASE}/events/registered/${user.id}`)
       .then(res => setEvents(res.data))
       .catch(err => console.error('Event fetch error:', err));
 
-      axios.get(`${process.env.REACT_APP_API_BASE}/clubs/myclubs/${user.id}`);
+      axios.get(`${process.env.REACT_APP_API_BASE}/clubs/myclubs/${user.id}`)
       .then(res => setClubs(res.data))
       .catch(err => console.error('Club fetch error:', err));
   }, [user?.id]);
