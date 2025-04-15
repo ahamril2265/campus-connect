@@ -3,13 +3,18 @@ const cors = require('cors');
 const app = express();
 const db = require('./config/db');
 const authRoutes = require('./routes/auth');
+const allowedOrigins = ['https://campusconnect.vercel.app'];
 const eventRoutes = require('./routes/events');
 const clubRoutes = require('./routes/clubs');
 const announcementRoutes = require('./routes/announcements');
 const userRoutes = require('./routes/users');
 require('dotenv').config();
 
-app.use(cors());
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true // if you're using cookies/auth
+}));
 app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/events', eventRoutes);
