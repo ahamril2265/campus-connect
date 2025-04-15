@@ -1,4 +1,8 @@
 const bcrypt = require('bcryptjs');
+const express = require('express');
+const router = express.Router(); 
+const pool = require('../config/db');
+
 
 // Update Password (Authenticated)
 router.post('/update-password', (req, res) => {
@@ -30,4 +34,6 @@ router.get('/all', (req, res) => {
       res.status(200).json(result);
     });
   });
+
+  module.exports = router;
   
