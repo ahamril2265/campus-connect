@@ -6,15 +6,14 @@ function Clubs() {
   const user = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/clubs/all')
-      .then(res => setClubs(res.data))
+    axios.get(`${process.env.REACT_APP_API_BASE}/clubs/all`);
+    .then(res => setClubs(res.data))
       .catch(err => console.error('Error fetching clubs:', err));
   }, []);
 
   const handleJoin = async (clubId) => {
     try {
-      await axios.post('http://localhost:5000/api/clubs/join', {
-        user_id: user.id,
+      await axios.post(`${process.env.REACT_APP_API_BASE}/clubs/join`, {        user_id: user.id,
         club_id: clubId
       });
       alert('Successfully joined the club!');

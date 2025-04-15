@@ -8,8 +8,8 @@ function MyEvents() {
   useEffect(() => {
     if (!user?.id) return;
 
-    axios.get(`http://localhost:5000/api/events/registered/${user.id}`)
-      .then(res => setMyEvents(res.data))
+    axios.get(`${process.env.REACT_APP_API_BASE}/events/registered/${user.id}`)
+    .then(res => setMyEvents(res.data))
       .catch(err => console.error(err));
   }, [user?.id]);
 

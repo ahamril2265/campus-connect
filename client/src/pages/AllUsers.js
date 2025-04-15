@@ -5,8 +5,8 @@ function AllUsers() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/users/all')
-      .then(res => setUsers(res.data))
+    axios.get(`${process.env.REACT_APP_API_BASE}/users/all`);
+    .then(res => setUsers(res.data))
       .catch(err => console.error(err));
   }, []);
 

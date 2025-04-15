@@ -22,7 +22,7 @@ function AddEvent() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/events/add', event);
+      await axios.post(`${process.env.REACT_APP_API_BASE}/events/add`, event);
       alert('Event added successfully!');
       navigate('/events');
     } catch (err) {

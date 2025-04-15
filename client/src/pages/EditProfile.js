@@ -22,11 +22,11 @@ function EditProfile() {
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/events/registered/${user.id}`)
-      .then(res => setEvents(res.data))
+    axios.get(`${process.env.REACT_APP_API_BASE}/events/registered/${user.id}`);
+    .then(res => setEvents(res.data))
       .catch(err => console.error(err));
 
-    axios.get(`http://localhost:5000/api/clubs/myclubs/${user.id}`)
+      axios.get(`${process.env.REACT_APP_API_BASE}/clubs/myclubs/${user.id}`);
       .then(res => setClubs(res.data))
       .catch(err => console.error(err));
   }, [user.id]);

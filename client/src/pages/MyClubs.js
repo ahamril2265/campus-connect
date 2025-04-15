@@ -8,7 +8,7 @@ function MyClubs() {
   useEffect(() => {
     if (!user?.id) return;
 
-    axios.get(`http://localhost:5000/api/clubs/myclubs/${user.id}`)
+    axios.get(`${process.env.REACT_APP_API_BASE}/clubs/myclubs/${user.id}`)
       .then(res => setMyClubs(res.data))
       .catch(err => console.error(err));
   }, [user?.id]);
